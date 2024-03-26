@@ -130,7 +130,9 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                 <select class="form-select" onchange="window.location = this.options[this.selectedIndex].value">
                     <option selected><?php echo $templateData['current_location'] ?></option>
                     <?php foreach ($templateData['locations'] as $location => $link): ?>
-                        <option value="<?php echo $link ?>"><?php echo $location ?></option>
+                        <?php if ($location !== $templateData['current_location']): ?>
+                            <option value="<?php echo $link ?>"><?php echo $location ?></option>
+                        <?php endif ?>
                     <?php endforeach ?>
                 </select>
             </div>
