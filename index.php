@@ -162,6 +162,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                                 <?php endif ?>
                             </div>
                         </div>
+                        <!--
                         <div class="col-md-5">
                             <label class="mb-2 text-muted">Facility</label>
                             <div class="input-group">
@@ -169,6 +170,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                                 <a href="<?php echo $templateData['facility_url'] ?>" class="btn btn-outline-secondary" target="_blank">PeeringDB</a>
                             </div>
                         </div>
+                        -->
                     </div>
 
                     <div class="row mb-3">
