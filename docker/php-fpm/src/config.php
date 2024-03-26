@@ -2,20 +2,20 @@
 use Hybula\LookingGlass;
 
 // Define the HTML title;
-const LG_TITLE = 'Looking Glass';
+const LG_TITLE = 'SalmonCloud Looking Glass';
 
 // Define a logo, this can be HTML too, see the other example for an image;
-const LG_LOGO = '<h2 style="color: #000000;">Company Looking Glass</h2>';
-const LG_LOGO_DARK = '<h2 style="color: #ffffff;">Company Looking Glass</h2>';
+const LG_LOGO = '<img src="https://imagedelivery.net/KiiXNq7dqOK23kNM9jFFOw/f0078488-bcc7-4c38-4319-5df4f5705000/215x215" alt="Logo" style="width:128px;height:128px;"><h2 style="color: #000000;">SalmonCloud</h2>';
+const LG_LOGO_DARK = '<img src="https://imagedelivery.net/KiiXNq7dqOK23kNM9jFFOw/f0078488-bcc7-4c38-4319-5df4f5705000/215x215" alt="Logo" style="width:128px;height:128px;"><h2 style="color: #ffffff;">SalmonCloud</h2>';
 
 // Define the URL where the logo points to;
-const LG_LOGO_URL = 'https://github.com/hybula/lookingglass/';
+const LG_LOGO_URL = 'https://salmoncloud.co.uk/';
 
 // Theme mode;
 const LG_THEME = 'auto';
 
 // Enable the latency check feature;
-const LG_CHECK_LATENCY = false;
+const LG_CHECK_LATENCY = true;
 
 // Define a custom CSS file which can be used to style the LG, set false to disable, else point to the CSS file;
 const LG_CSS_OVERRIDES = false;
@@ -64,9 +64,8 @@ const LG_METHODS = [
 
 // Define other looking glasses, this is useful if you have multiple networks and looking glasses;
 const LG_LOCATIONS = [
-    'Location A' => 'https://github.com/hybula/lookingglass/',
-    'Location B' => 'https://github.com/hybula/lookingglass/',
-    'Location C' => 'https://github.com/hybula/lookingglass/',
+    'San Jose, United States' => 'http://sjc.lg.salmoncloud.co.uk',
+    'Hong Kong, China' => 'http://hkg.lg.salmoncloud.co.uk',
 ];
 
 // Enable the iPerf info inside the speedtest block, set to false to disable;
@@ -74,11 +73,11 @@ const LG_SPEEDTEST_IPERF = true;
 // Define the label of an incoming iPerf test;
 const LG_SPEEDTEST_LABEL_INCOMING = 'iPerf3 Incoming';
 // Define the command to use to test incoming speed using iPerf, preferable iPerf3;
-const LG_SPEEDTEST_CMD_INCOMING = 'iperf3 -4 -c hostname -p 5201 -P 4';
+const LG_SPEEDTEST_CMD_INCOMING = 'iperf3 -4 -c ' . LG_IPV4 . ' -p 5201 -P 4';
 // Define the label of an outgoing iPerf test;
 const LG_SPEEDTEST_LABEL_OUTGOING = 'iPerf3 Outgoing';
 // Define the command to use to test outgoing speed using iPerf, preferable iPerf3;
-const LG_SPEEDTEST_CMD_OUTGOING = 'iperf3 -4 -c hostname -p 5201 -P 4 -R';
+const LG_SPEEDTEST_CMD_OUTGOING = 'iperf3 -4 -c ' . LG_IPV4 . ' -p 5201 -P 4 -R';
 // Define speedtest files with URLs to the actual files;
 const LG_SPEEDTEST_FILES = [
     '100M' => 'https://github.com/hybula/lookingglass/',
