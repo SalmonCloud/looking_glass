@@ -110,6 +110,124 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <?php if ($templateData['custom_css']) { echo '<link href="'.$templateData['custom_css'].'" rel="stylesheet">'; } ?>
     <?php if ($templateData['custom_head']) { echo $templateData['custom_head']; } ?>
+
+    <?php if (LG_BLOCK_SPEEDTEST): ?>
+    <script type="text/javascript" src="speedtest.js"></script>
+    <script type="text/javascript">
+
+    //INITIALIZE SPEEDTEST
+    var s=new Speedtest(); //create speedtest object
+    s.onupdate=function(data){ //callback to update data in UI
+        I("ip").textContent=data.clientIp;
+        I("dlText").textContent=(data.testState==1&&data.dlStatus==0)?"...":data.dlStatus;
+        I("ulText").textContent=(data.testState==3&&data.ulStatus==0)?"...":data.ulStatus;
+        I("pingText").textContent=data.pingStatus;
+        I("jitText").textContent=data.jitterStatus;
+    }
+    s.onend=function(aborted){ //callback for test ended/aborted
+        I("startStopBtn").className="btn btn-primary ms-auto"; //show start button again
+        if(aborted){ //if the test was aborted, clear the UI and prepare for new test
+            initUI();
+        }
+    }
+
+    function startStop(){ //start/stop button pressed
+        if(s.getState()==3){
+            //speedtest is running, abort
+            s.abort();
+        }else{
+            //test is not running, begin
+            s.start();
+            I("startStopBtn").className="btn btn-danger ms-auto";
+        }
+    }
+
+    //function to (re)initialize UI
+    function initUI(){
+        I("dlText").textContent="";
+        I("ulText").textContent="";
+        I("pingText").textContent="";
+        I("jitText").textContent="";
+        I("ip").textContent="";
+    }
+
+    function I(id){return document.getElementById(id);}
+    </script>
+
+    <!-- Speedtest CSS -->
+    <style type="text/css">
+        #startStopBtn:before{
+            content:"Start";
+        }
+        #startStopBtn.running:before{
+            content:"Abort";
+        }
+        #test{
+            margin-top:2em;
+            margin-bottom:2em;
+        }
+        div.testArea{
+            display:inline-block;
+            width:14em;
+            height:9em;
+            position:relative;
+            box-sizing:border-box;
+        }
+        div.testName{
+            position:absolute;
+            top:0.1em; left:0;
+            width:100%;
+            font-size:1.1em;
+            z-index:9;
+        }
+        div.meterText{
+            position:absolute;
+            bottom:1.5em; left:0;
+            width:100%;
+            font-size:2.5em;
+            z-index:9;
+        }
+        #dlText{
+            color:#6060AA;
+        }
+        #ulText{
+            color:#309030;
+        }
+        #pingText,#jitText{
+            color:#AA6060;
+        }
+        div.meterText:empty:before{
+            color:#505050 !important;
+            content:"0.00";
+        }
+        div.unit{
+            position:absolute;
+            bottom:2em; left:0;
+            width:100%;
+            z-index:9;
+        }
+        div.testGroup{
+            display:inline-block;
+        }
+        /*
+        @media all and (max-width:65em){
+            body{
+                font-size:1.5vw;
+            }
+        }
+        @media all and (max-width:40em){
+            body{
+                font-size:0.8em;
+            }
+            div.testGroup{
+                display:block;
+                margin: 0 auto;
+            }
+        }
+        */
+    </style>
+    <?php endif ?>
+
 </head>
 <body>
 
@@ -175,14 +293,14 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
 
                     <div class="row mb-3">
                         <div class="col-md-3">
-                            <label class="mb-2 text-muted">Test IPv4</label>
+                            <label class="mb-2 text-muted">Looking Glass IPv4</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" value="<?php echo $templateData['ipv4'] ?>" onfocus="this.select()" readonly="">
                                 <button class="btn btn-outline-secondary" onclick="copyToClipboard('<?php echo $templateData['ipv4'] ?>', this)">Copy</button>
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <label class="mb-2 text-muted">Test IPv6</label>
+                            <label class="mb-2 text-muted">Looking Glass IPv6</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" value="<?php echo $templateData['ipv6'] ?>" onfocus="this.select()" readonly="">
                                 <button class="btn btn-outline-secondary" onclick="copyToClipboard('<?php echo $templateData['ipv6'] ?>', this)">Copy</button>
@@ -262,7 +380,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                     <h1 class="fs-4 card-title mb-4">Speedtest</h1>
 
                     <?php if ($templateData['speedtest_iperf']): ?>
-                    <div class="row mb-3">
+                    <div class="row mb-4">
                         <div class="col-md-6">
                             <label class="mb-2 text-muted"><?php echo $templateData['speedtest_incoming_label'] ?></label>
                             <p><code><?php echo $templateData['speedtest_incoming_cmd']; ?></code></p>
@@ -276,6 +394,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                     </div>
                     <?php endif ?>
 
+                    <!--
                     <div class="row">
                         <label class="mb-2 text-muted">Test Files</label>
                         <div class="btn-group input-group mb-3">
@@ -284,10 +403,52 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                             <?php endforeach ?>
                         </div>
                     </div>
+                    -->
+
+                    <div class="row">
+                        <label class="testName mb-2">LibreSpeed</label>
+                        <div class="col-md mb-2">
+                            <button class="btn btn-primary ms-auto" id="startStopBtn" onclick="startStop()"></button>
+                        </div>
+                        <div id="test">
+                            <div class="testGroup">
+                                <div class="testArea">
+                                    <div class="testName">Download</div>
+                                    <div id="dlText" class="meterText"></div>
+                                    <div class="unit">Mbit/s</div>
+                                </div>
+                                <div class="testArea">
+                                    <div class="testName">Upload</div>
+                                    <div id="ulText" class="meterText"></div>
+                                    <div class="unit">Mbit/s</div>
+                                </div>
+                            </div>
+                            <div class="testGroup">
+                                <div class="testArea">
+                                    <div class="testName">Ping</div>
+                                    <div id="pingText" class="meterText"></div>
+                                    <div class="unit">ms</div>
+                                </div>
+                                <div class="testArea">
+                                    <div class="testName">Jitter</div>
+                                    <div id="jitText" class="meterText"></div>
+                                    <div class="unit">ms</div>
+                                </div>
+                            </div>
+                            <div id="ipArea">
+                                IP Address: <span id="ip"></span>
+                            </div>
+                            <a href="https://github.com/librespeed/speedtest">Source code</a>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            initUI();
+        </script>
         <?php endif ?>
 
         <?php echo $templateData['custom_html'] ?>
