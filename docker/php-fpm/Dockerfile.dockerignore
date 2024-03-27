@@ -1,3 +1,7 @@
-docker/php-fpm/Dockerfile
-docker/php-fpm/Dockerfile.dockerignore
-.git
+docker-compose*
+docker/nginx/
+docker/php-fpm/Dockerfile*
+.git*
+*.md
+*.js
+screenshot.png

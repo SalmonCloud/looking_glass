@@ -1,2 +1,6 @@
-Dockerfile
-Dockerfile.dockerignore
+docker-compose*
+docker/nginx/Dockerfile*
+docker/php-fpm/
+.git*
+*.md
+screenshot.png

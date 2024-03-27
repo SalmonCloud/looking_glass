@@ -5,8 +5,8 @@ services:
     image: salmoncloud/lg-nginx:sjc
     container_name: lg-nginx
     build:
-      context: docker/nginx
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/nginx/Dockerfile
     ports:
       - "80:80"
     restart: unless-stopped
