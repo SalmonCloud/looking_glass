@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: salmoncloud/lg-nginx:hkg
+    container_name: lg-nginx
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+
+  php-fpm:
+    image: salmoncloud/lg-php:hkg
+    container_name: lg-php
+    build:
+      context: .
+      dockerfile: docker/php-fpm/Dockerfile
+    restart: unless-stopped
+    environment:
+      # For a better reference as to what these variables do, check out 'config.dist.php' or 'docker/php-fpm/src/config.php'.
+      # Please replace them with values that are relevant to your situation!
+      LOCATION: Hong Kong, China
+      FACILITY: Facility
+      FACILITY_URL: http://localhost/
+      IPV4_ADDRESS: 91.124.30.5
+      IPV6_ADDRESS: 2602:fa67:101:17::a
+      MAPS_QUERY: Hong Kong, China
+      # Pass these variables with any arbitrary value to disable the respective block.
+      # DISABLE_BLOCK_NETWORK: 'true'
+      # DISABLE_BLOCK_LOOKINGGLASS: 'true'
+      # DISABLE_BLOCK_SPEEDTEST: 'true'
+      # Uncomment to enable the custom block, which you can use to add something custom to the LG.
+      # ENABLE_CUSTOM_BLOCK: 'true'
+      # Uncomment if you require visitors to accept the Terms of Use; the value should be a link to the terms.
+      # LG_TERMS: http://localhost/
+
+  iperf3:
+    image: networkstatic/iperf3:latest
+    container_name: lg-iperf3
+    ports:
+      - "5201:5201"
+    command: -s
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+
