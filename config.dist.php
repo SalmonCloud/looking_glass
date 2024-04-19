@@ -80,11 +80,14 @@ const LG_SPEEDTEST_LABEL_OUTGOING = 'iPerf3 Outgoing';
 // Define the command to use to test outgoing speed using iPerf, preferable iPerf3;
 const LG_SPEEDTEST_CMD_OUTGOING = 'iperf3 -4 -c hostname -p 5201 -P 4 -R';
 // Define speedtest files with URLs to the actual files;
-const LG_SPEEDTEST_FILES = [
-    '100M' => 'https://github.com/hybula/lookingglass/',
-    '1G' => 'https://github.com/hybula/lookingglass/',
-    '10G' => 'https://github.com/hybula/lookingglass/'
-];
+/*
+ * const LG_SPEEDTEST_FILES = [
+ *     '100M' => 'https://github.com/hybula/lookingglass/',
+ *     '1G' => 'https://github.com/hybula/lookingglass/',
+ *     '10G' => 'https://github.com/hybula/lookingglass/'
+ * ];
+ */
+const LG_SPEEDTEST_FILES = [];
 
 // Define if you require visitors to agree with the Terms of Use. The value should be a link to the terms, or false to disable it completely.
 const LG_TERMS = false;
