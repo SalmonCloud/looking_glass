@@ -245,7 +245,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                 </a>
             </div>
             <div class="col-4 float-end">
-                <select class="form-select" onchange="window.location = this.options[this.selectedIndex].value">
+                <select class="form-select" onchange="window.location = this.options[this.selectedIndex].value" <?php if (count($templateData['locations']) == 0) echo 'disabled'; ?>>
                     <option selected><?php echo $templateData['current_location'] ?></option>
                     <?php foreach ($templateData['locations'] as $location => $link): ?>
                         <?php if ($location !== $templateData['current_location']): ?>
@@ -394,7 +394,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                     </div>
                     <?php endif ?>
 
-                    <!--
+                    <?php if (count($templateData['speedtest_files'])): ?>
                     <div class="row">
                         <label class="mb-2 text-muted">Test Files</label>
                         <div class="btn-group input-group mb-3">
@@ -403,7 +403,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                             <?php endforeach ?>
                         </div>
                     </div>
-                    -->
+                    <?php endif ?>
 
                     <div class="row">
                         <label class="testName mb-2">LibreSpeed</label>
