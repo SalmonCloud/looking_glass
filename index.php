@@ -107,7 +107,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
     <meta content="" name="description">
     <meta content="Hybula" name="author">
     <title><?php echo $templateData['title'] ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <?php if ($templateData['custom_css']) { echo '<link href="'.$templateData['custom_css'].'" rel="stylesheet">'; } ?>
     <?php if ($templateData['custom_head']) { echo $templateData['custom_head']; } ?>
 
@@ -455,8 +455,9 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
 
     </main>
     <footer class="pt-3 mt-5 my-5 text-muted border-top">
-        Powered by <a href="https://github.com/hybula/lookingglass" target="_blank">Hybula Looking Glass</a>
-        <a href="https://github.com/hybula/lookingglass" target="_blank" class="float-end"><img src="https://img.shields.io/github/stars/hybula/lookingglass?style=social" alt="GitHub"></a>
+        Powered by <a href="https://github.com/SalmonCloud/looking_glass" target="_blank">SalmonCloud Looking Glass</a>,
+        a fork of <a href="https://github.com/hybula/lookingglass" target="_blank">Hybula Looking Glass</a>.
+        <a href="https://github.com/hybula/lookingglass" target="_blank" class="float-end"><img src="https://img.shields.io/github/stars/SalmonCloud/looking_glass?style=social" alt="GitHub"></a>
     </footer>
 </div>
 
@@ -509,7 +510,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
                 for await (const chunk of readChunks(reader)) {
                     const text = decoder.decode(chunk)
                     <?php if(in_array($_SESSION[LookingGlass::SESSION_TARGET_METHOD], [LookingGlass::METHOD_MTR, LookingGlass::METHOD_MTR6])): ?>
-                    let splittedText = text.split('---')
+                    let splittedText = text.split('@@@')
                     if (!splittedText[1]) {
                         continue
                     }
@@ -554,7 +555,7 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
     }
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
 </html>
