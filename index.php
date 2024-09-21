@@ -455,8 +455,9 @@ $templateData['csrfToken'] = $_SESSION[LookingGlass::SESSION_CSRF] = bin2hex(ran
 
     </main>
     <footer class="pt-3 mt-5 my-5 text-muted border-top">
-        Powered by <a href="https://github.com/hybula/lookingglass" target="_blank">Hybula Looking Glass</a>
-        <a href="https://github.com/hybula/lookingglass" target="_blank" class="float-end"><img src="https://img.shields.io/github/stars/hybula/lookingglass?style=social" alt="GitHub"></a>
+        Powered by <a href="https://github.com/SalmonCloud/looking_glass" target="_blank">SalmonCloud Looking Glass</a>,
+        a fork of <a href="https://github.com/hybula/lookingglass" target="_blank">Hybula Looking Glass</a>.
+        <a href="https://github.com/hybula/lookingglass" target="_blank" class="float-end"><img src="https://img.shields.io/github/stars/SalmonCloud/looking_glass?style=social" alt="GitHub"></a>
     </footer>
 </div>
 
