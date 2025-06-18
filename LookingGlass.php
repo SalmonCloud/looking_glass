@@ -463,17 +463,23 @@ class LookingGlass
             }
             $sock['local'] = $temp[0];
             preg_match('/\d+\.\d+\.\d+\.\d+|\[[:a-fA-F0-9]+\]/', $explodedsocket[3], $temp);
-            if (preg_match('/^\[(.*)\]$/', $temp[0], $matches)) { $temp[0] = $matches[1]; }
-            $sock['remote'] = $temp[0];
+            $remote = $temp[0] ?? '';
+            if ($remote === '') {
+                continue;
+            }
+            if (preg_match('/^\[(.*)\]$/', $remote, $matches)) {
+                $remote = $matches[1];
+            }
+            $sock['remote'] = $remote;
             preg_match('/segs_out:(\d+)/', $socket, $temp);
-            $sock['segs_out'] = $temp[1];
+            $sock['segs_out'] = $temp[1] ?? 0;
             preg_match('/segs_in:(\d+)/', $socket, $temp);
-            $sock['segs_in'] = $temp[1];
+            $sock['segs_in'] = $temp[1] ?? 0;
             preg_match_all('/rtt:(\d+\.\d+)\/(\d+\.\d+)/', $socket, $temp);
-            $sock['latency'] = $temp[1][0];
-            $sock['jitter'] = $temp[2][0];
+            $sock['latency'] = $temp[1][0] ?? 0;
+            $sock['jitter'] = $temp[2][0] ?? 0;
             preg_match_all('/retrans:\d+\/(\d+)/', $socket, $temp);
-            $sock['retransmissions'] = (isset($temp[1][0]) ? $temp[1][0] : 0);
+            $sock['retransmissions'] = $temp[1][0] ?? 0;
             if ($sock['remote'] == $ip) {
                 $output[] = $sock;
             }
