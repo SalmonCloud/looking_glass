@@ -5,8 +5,8 @@ use Hybula\LookingGlass;
 const LG_TITLE = 'SalmonCloud Looking Glass';
 
 // Define a logo, this can be HTML too, see the other example for an image;
-const LG_LOGO = '<img src="https://imagedelivery.net/KiiXNq7dqOK23kNM9jFFOw/f0078488-bcc7-4c38-4319-5df4f5705000/215x215" alt="Logo" style="width:128px;height:128px;"><h2 style="color: #000000;">SalmonCloud</h2>';
-const LG_LOGO_DARK = '<img src="https://imagedelivery.net/KiiXNq7dqOK23kNM9jFFOw/f0078488-bcc7-4c38-4319-5df4f5705000/215x215" alt="Logo" style="width:128px;height:128px;"><h2 style="color: #ffffff;">SalmonCloud</h2>';
+const LG_LOGO = '<img src="https://salmoncloud.co.uk/Logos/SalmonCloud/salmoncloud_icon_850x850.png" alt="Logo" style="width:128px;height:128px;"><h2 style="color: #000000;">SalmonCloud</h2>';
+const LG_LOGO_DARK = '<img src="https://salmoncloud.co.uk/Logos/SalmonCloud/salmoncloud_icon_850x850.png" alt="Logo" style="width:128px;height:128px;"><h2 style="color: #ffffff;">SalmonCloud</h2>';
 
 // Define the URL where the logo points to;
 const LG_LOGO_URL = 'https://salmoncloud.co.uk/';
